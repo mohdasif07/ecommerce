@@ -10,8 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_01_094050) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_03_113206) do
   create_table "homes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "oders", force: :cascade do |t|
+    t.integer "amount"
+    t.date "date"
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_oders_on_product_id"
+    t.index ["user_id"], name: "index_oders_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "amount"
+    t.date "date"
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,4 +56,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_01_094050) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
   end
+
+  add_foreign_key "oders", "products"
+  add_foreign_key "oders", "users"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users"
 end
