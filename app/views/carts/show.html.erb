@@ -1,0 +1,11 @@
+<h1>Your Cart</h1>
+
+<% @cart.cart_items.each do |cart_item| %>
+  <div>
+    <%= cart_item.product.name %> - <%= cart_item.quantity %> x <%= cart_item.price_at_time %>
+  </div>
+<% end %>
+
+<p>Total: <%= @cart.total_price %></p>
+
+<%= link_to 'Proceed to Checkout', checkout_path(@cart) %>

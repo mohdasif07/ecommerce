@@ -6,6 +6,8 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.2]
       # Check if the email column exists before adding it again
       unless column_exists?(:users, :email)
         t.string :email, default: "", null: false
+        t.index ["email"], name: "index_users_on_email", unique: true
+
       end
       t.string :encrypted_password, default: "", null: false
       t.string :reset_password_token

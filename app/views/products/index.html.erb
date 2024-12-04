@@ -5,6 +5,7 @@
     <th>Name</th>
   <th>Price</th>
   <th>Description</th>
+  <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +14,10 @@
         <td><%= product.name %></td>
         <td><%= product.price %></td>
         <td><%= product.description %></td>
+        <td><%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= link_to "New Product", new_product_path%>
+<%= link_to "My Order",new_order_path %>
