@@ -1,0 +1,12 @@
+<h1>Your Cart</h1>
+  <% @orders.each do |order| %>
+      <ul>
+        <% order.products.each do |product| %>
+          <li>
+            Product: <%= product.name %>, <%= product.price %>, <%= product.description %>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+
+

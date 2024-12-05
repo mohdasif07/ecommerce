@@ -13,8 +13,9 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @product = Product.new(product_params)
     if @product.save 
-     redirect_to products_path(@product)
+     redirect_to products_path
     else
      render :new
     end
@@ -25,7 +26,7 @@ class ProductsController < ApplicationController
 
   def update 
     if @product.update(product_params)
-      redirect_to @product
+      redirect_to products_path
     else
       render :edit
     end
@@ -33,9 +34,8 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to root_path, status: :see_other
+    redirect_to products_path, status: :see_other
   end
-    
   private
   def set_product
     @product = Product.find_by(id: params[:id])

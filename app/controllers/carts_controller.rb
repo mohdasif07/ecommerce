@@ -1,21 +1,20 @@
 class CartsController < ApplicationController
     def index
     @carts = Cart.all
+    @orders = Order.all
     end
     def show
     end
     def add_to_cart
-      
-        @product = Product.find(params[:product_id])
-        @cart = current_user.cart || current_user.create_cart(status: 'pending')
-        @cart_item = @cart.cart_items.find_by(product_id: @product.id)
-    
-        if @cart_item
-          @cart_item.update(quantity: @cart_item.quantity + 1)
+        @product = Product.find_by(id: params[:id])
+        if current_user.orders.present?
+            @order = current_user.orders
         else
-          @cart.cart_items.create(product: @product, quantity: 1, price_at_time: @product.price)
-        end
+            current_user.orders.create(amount: 10000,date: "12-2-2024",product_id:1)
+        end 
+       
     
         redirect_to carts_path
       end
+    
 end
