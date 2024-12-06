@@ -24,17 +24,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_044048) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "oders", force: :cascade do |t|
-    t.integer "amount"
-    t.date "date"
-    t.integer "user_id", null: false
-    t.integer "product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_oders_on_product_id"
-    t.index ["user_id"], name: "index_oders_on_user_id"
-  end
-
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "product_id", null: false

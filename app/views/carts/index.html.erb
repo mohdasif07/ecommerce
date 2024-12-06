@@ -1,12 +1,25 @@
 <h1>Your Cart</h1>
-  <% @orders.each do |order| %>
-      <ul>
-        <% order.products.each do |product| %>
-          <li>
-            Product: <%= product.name %>, <%= product.price %>, <%= product.description %>
-          </li>
-        <% end %>
-      </ul>
-  <% end %>
-
-
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart&.order_items&.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.product.price %></td>
+          <td><%= item.product.price * item.quantity %></td>
+          <td>
+            <%= button_to 'Remove', cart_order_item_path(@cart, item), method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

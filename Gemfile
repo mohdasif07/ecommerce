@@ -58,3 +58,4 @@ end
 gem 'devise'
 
 gem 'pry-byebug'
+gem "tailwindcss-rails", "~> 3.0"
