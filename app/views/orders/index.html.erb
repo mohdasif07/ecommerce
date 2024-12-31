@@ -1,0 +1,27 @@
+<h1>Your Orders</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Shipping Address</th>
+        <th>Amount</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.shipping_address %></td>
+          <td><%= number_to_currency(order.amount) %></td>
+          <td>
+            <%= link_to 'View', order_path(order) %> | 
+            <%= link_to 'Cancel Order', cancel_order_path(order), method: :post, data: { confirm: 'Are you sure you want to cancel this order?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<%= link_to 'Place a New Order', checkout_carts_path %>

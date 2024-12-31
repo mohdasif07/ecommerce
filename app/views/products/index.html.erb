@@ -15,11 +15,7 @@
         <td><%= product.price %></td>
         <td><%= product.description %></td>
         <td>
-        <% if @cart.present? %>
-          <%= button_to 'Add to Cart', add_to_cart_cart_path(cart_id: @cart.id, product_id: product.id, quantity: 1), method: :post %>
-        <% else %>
-          <p>Your cart is empty. Please create a cart.</p>
-        <% end %>
+          <%= button_to 'Add to Cart', add_to_cart_carts_path(product_id: product.id), method: :post %>
         </td>
       </tr>
     <% end %>

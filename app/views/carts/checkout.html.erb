@@ -1,0 +1,40 @@
+
+  <h2>Checkout</h2>
+
+  <h3>Cart Summary</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.name %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= number_to_currency(cart_item.product.price) %></td>
+          <td><%= number_to_currency(cart_item.total_price) %></td>
+          <td>
+          <%= button_to 'Remove', remove_from_cart_carts_path(cart_item), method: :delete %>
+        </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h3>Total: <%= number_to_currency(@cart.total_price) %></h3>
+
+
+<h3>Shipping Information</h3>
+<%= form_with url: orders_path, method: :post, local: true do |f| %>
+  <div>
+    <%= f.label :shipping_address, 'Shipping Address' %>
+    <%= f.text_area :shipping_address, rows: 4, placeholder: "Enter your shipping address" %>
+  </div>
+  <%= f.submit "Place Order"%>
+<% end %>
